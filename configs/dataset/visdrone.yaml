@@ -1,4 +1,4 @@
-path: E:\Project\VisDrone_Experiment\VisDrone2019-DET  # 请修改为您的实际路径
+path: E:\Project\VisDrone_Experiment\VisDrone2019-DET
 
 
 train: images/train

@@ -1,0 +1,14 @@
+experiment_name: ema_attention
+description: 基准模型 + EMA注意力机制
+base_model: yolov8s.pt
+dataset_config: configs/dataset/visdrone.yaml
+epochs: 80
+imgsz: 640
+batch_size: 16
+patience: 20
+output_dir: runs/ema_attention
+enabled_modules: ['ema_attention']
+module_config:
+  ema_attention: true
+  attention_type: 'EMA'
+  attention_channels: 512

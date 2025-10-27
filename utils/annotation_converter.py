@@ -194,8 +194,7 @@ class AnnotationConverter:
         return success_count > 0
 
     def create_dataset_yaml(self):
-        """创建YOLO格式的数据集配置文件"""
-        yolo_dataset_config = path_manager.project_root / "configs" / "dataset" / "visdrone_yolo.yaml"
+
 
         config_content = f"""# YOLO格式的VisDrone数据集配置
 path: {path_manager.dataset_root}  # 数据集根目录
@@ -248,10 +247,10 @@ epochs: 80
 
         if all_success:
             # 创建YOLO格式的配置文件
-            self.create_dataset_yaml()
+            # self.create_dataset_yaml()
             print("\n🎉 数据集转换完成!")
             print(f"📁 转换后的标注保存在: {path_manager.dataset_root / 'labels'}")
-            print(f"⚙ 新的配置文件: configs/dataset/visdrone_yolo.yaml")
+
         else:
             print("\n⚠ 数据集转换过程中出现错误，请检查上述输出")
 
