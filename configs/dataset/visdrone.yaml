@@ -1,0 +1,30 @@
+path: E:\Project\VisDrone_Experiment\VisDrone2019-DET  # 请修改为您的实际路径
+
+
+train: images/train
+val: images/val
+test: images/test_dev
+
+
+train_labels: labels/train
+val_labels: labels/val
+test_labels: labels/test_dev
+
+
+nc: 10
+names:
+  - 'pedestrian'
+  - 'people'
+  - 'bicycle'
+  - 'car'
+  - 'van'
+  - 'truck'
+  - 'tricycle'
+  - 'awning-tricycle'
+  - 'bus'
+  - 'motor'
+
+
+img_size: 640
+batch_size: 16
+epochs: 80
