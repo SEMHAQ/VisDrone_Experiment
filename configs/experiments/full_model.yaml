@@ -1,16 +1,25 @@
-experiment_name: full_model
-description: 完整模型 - 所有改进组合
 base_model: yolov8s.pt
-dataset_config: configs/dataset/visdrone.yaml
-epochs: 80
-imgsz: 640
 batch_size: 16
-patience: 20
-output_dir: runs/full_model
-enabled_modules: ['image_enhance', 'ema_attention', 'bifpn']
+dataset_config: configs/dataset/visdrone.yaml
+description: 完整模型 - 所有改进组合
+enabled_modules:
+- image_enhance
+- ema_attention
+- bifpn
+epochs: 80
+experiment_name: full_model
+imgsz: 640
+model_class: FullModel
 module_config:
-  image_enhance: true
-  ema_attention: true
+  attention_channels: 512
+  attention_type: EMA
   bifpn: true
-  attention_type: 'EMA'
   bifpn_channels: 256
+  bifpn_levels: 5
+  ema_attention: true
+  enhancement_methods:
+  - clahe
+  - deblur
+  image_enhance: true
+output_dir: runs/full_model
+patience: 20

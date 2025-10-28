@@ -53,7 +53,7 @@ def train_baseline():
         patience=20,
         save=True,
         exist_ok=True,
-        device=0,  # 使用GPU，如果是CPU改为 'cpu'
+        device='cpu',  # 使用GPU，如果是CPU改为 'cpu'
         workers=4,
         lr0=0.01,
         lrf=0.01,

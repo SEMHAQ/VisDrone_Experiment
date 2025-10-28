@@ -1,14 +1,16 @@
-experiment_name: bifpn
-description: 基准模型 + BiFPN特征金字塔
 base_model: yolov8s.pt
-dataset_config: configs/dataset/visdrone.yaml
-epochs: 80
-imgsz: 640
 batch_size: 16
-patience: 20
-output_dir: runs/bifpn
-enabled_modules: ['bifpn']
+dataset_config: configs/dataset/visdrone.yaml
+description: 基准模型 + BiFPN特征金字塔
+enabled_modules:
+- bifpn
+epochs: 80
+experiment_name: bifpn
+imgsz: 640
+model_class: BiFPNModel
 module_config:
   bifpn: true
   bifpn_channels: 256
   bifpn_levels: 5
+output_dir: runs/bifpn
+patience: 20

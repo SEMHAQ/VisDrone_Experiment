@@ -83,6 +83,9 @@ class PathManager:
             return True
 
 
+    def get_experiment_dir(self, exp_name):
+        """获取实验目录"""
+        return self.runs_dir / exp_name
 
 # 全局路径管理器实例
 path_manager = PathManager()
