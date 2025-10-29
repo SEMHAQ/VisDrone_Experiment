@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/models/hook_integration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/modules/bifpn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/modules/ema_attention.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/yolov8_bifpn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/yolov8_ema.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/yolov8_ema_bifpn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_ablation_study.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/analyze_results.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/init_project.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/run_ablation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/run_ablation_correct.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_ema_bifpn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_with_hooks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/VisDrone_Experiment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VisDrone_Experiment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2019-DET/labels/train.cache" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2019-DET/labels/train.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/args.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch2.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
