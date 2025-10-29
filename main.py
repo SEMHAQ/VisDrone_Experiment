@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """
-VisDrone实验主入口 - 更新版本
+VisDrone实验主入口
 """
 
 import os
 import sys
-import subprocess
+from pathlib import Path
+
+# 添加项目根目录到Python路径
+project_root = Path(__file__).parent
+sys.path.append(str(project_root))
 
 
 def main():
@@ -15,59 +19,53 @@ def main():
 
     while True:
         print("\n请选择操作:")
-        print("1. 🔍 验证环境")
-        print("2. 🎯 训练基准模型")
-        print("3. 📊 评估基准模型")
-        print("4. 🧪 运行消融实验")
-        print("5. 📈 结果分析")
-        print("6. ❌ 退出")
+        print("1. 验证环境")
+        print("2. 训练基准模型")
+        print("3. 运行消融实验")
+        print("4. 评估模型")
+        print("5. 退出")
 
-        choice = input("\n请输入选择 (1-6): ").strip()
+        choice = input("\n请输入选择 (1-5): ").strip()
 
         if choice == "1":
-            print("\n验证环境...")
-            os.system("python scripts/verify_environment.py")
-
+            verify_environment()
         elif choice == "2":
-            print("\n开始训练基准模型...")
-            os.system("python scripts/train_baseline.py")
-
+            train_baseline()
         elif choice == "3":
-            print("\n评估基准模型...")
-            os.system("python scripts/evaluate_model.py")
-
-        elif choice == "4":
-            print("\n运行消融实验...")
             run_ablation_study()
-
+        elif choice == "4":
+            evaluate_models()
         elif choice == "5":
-            print("\n结果分析...")
-            run_analysis()
-
-        elif choice == "6":
-            print("👋 再见!")
+            print("再见!")
             break
-
         else:
-            print("❌ 无效选择!")
+            print("无效选择!")
 
         input("\n按Enter键继续...")
 
 
+def verify_environment():
+    """验证环境"""
+    print("\n验证环境中...")
+    os.system("python scripts/verify_environment.py")
+
+
+def train_baseline():
+    """训练基准模型"""
+    print("\n训练基准模型中...")
+    os.system("python scripts/train_baseline.py")
+
+
 def run_ablation_study():
     """运行消融实验"""
-    print("消融实验功能开发中...")
-    print("当前可手动运行以下实验:")
-    print("1. 基准模型: python scripts/train_baseline.py")
-    print("2. 评估模型: python scripts/evaluate_model.py")
+    print("\n运行消融实验中...")
+    os.system("python scripts/run_ablation_study.py")
 
 
-def run_analysis():
-    """运行结果分析"""
-    print("结果分析功能开发中...")
-    print("请检查以下目录中的结果:")
-    print("- runs/baseline/metrics/")
-    print("- 训练日志和评估结果")
+def evaluate_models():
+    """评估模型"""
+    print("\n评估模型中...")
+    os.system("python scripts/evaluate_model.py")
 
 
 if __name__ == "__main__":

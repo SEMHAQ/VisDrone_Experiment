@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: yolov8s.pt
+model: scripts/yolov8s.pt
 data: E:\Project\VisDrone_Experiment\configs\dataset\visdrone.yaml
 epochs: 80
 time: null
@@ -17,7 +17,7 @@ name: baseline
 exist_ok: true
 pretrained: true
 optimizer: auto
-verbose: true
+verbose: false
 seed: 0
 deterministic: true
 single_cls: false
