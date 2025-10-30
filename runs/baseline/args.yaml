@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: scripts/yolov8s.pt
-data: E:\Project\VisDrone_Experiment\configs\dataset\visdrone.yaml
+data: D:\Project\VisDrone_Experiment\configs\dataset\visdrone.yaml
 epochs: 80
 time: null
 patience: 20
@@ -10,9 +10,9 @@ imgsz: 640
 save: true
 save_period: -1
 cache: false
-device: cpu
+device: '0'
 workers: 4
-project: E:\Project\VisDrone_Experiment\runs
+project: D:\Project\VisDrone_Experiment\runs
 name: baseline
 exist_ok: true
 pretrained: true
@@ -30,7 +30,6 @@ fraction: 1.0
 profile: false
 freeze: null
 multi_scale: false
-compile: false
 overlap_mask: true
 mask_ratio: 4
 dropout: 0.0
@@ -103,4 +102,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: botsort.yaml
-save_dir: E:\Project\VisDrone_Experiment\runs\baseline
+save_dir: D:\Project\VisDrone_Experiment\runs\baseline
