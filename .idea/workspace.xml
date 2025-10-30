@@ -4,30 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/log/2025-10-30-log-evaluate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/evaluate_all_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/evaluate_all_models_fixed.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_bifpn_only.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_ema_only.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/train_full_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/verify_experiments.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/dataset/visdrone.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dataset/visdrone.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/2025-10-30-log" beforeDir="false" afterPath="$PROJECT_DIR$/log/2025-10-30-log-train" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline2/args.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline2/labels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline3/args.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline3/labels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema2/args.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema2/labels.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema2/train_batch0.jpg" beforeDir="false" />
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验">
+      <change beforePath="$PROJECT_DIR$/scripts/train_bifpn_only.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/train_bifpn_only.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,6 +234,15 @@
       <option name="presentableId" value="Default" />
       <updated>1761329421546</updated>
     </task>
+    <task id="LOCAL-00001" summary="第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验">
+      <option name="closed" value="true" />
+      <created>1761838073084</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761838073084</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -268,5 +255,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验" />
+    <option name="LAST_COMMIT_MESSAGE" value="第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验" />
   </component>
 </project>
