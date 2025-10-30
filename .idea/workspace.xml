@@ -5,25 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/log/2025-10-30-log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_10_29_9_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2025_10_29_9_18__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log/2025-10-30-log-evaluate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/evaluate_all_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/evaluate_all_models_fixed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/train_bifpn_only.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/train_ema_only.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/train_full_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/verify_experiments.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2019-DET/labels/train.cache" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2019-DET/labels/train.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2019-DET/labels/val.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/dataset/visdrone.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dataset/visdrone.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/args.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/labels.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/labels.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/baseline/train_batch2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/baseline/train_batch2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/bifpn/args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/runs/bifpn/args.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/bifpn/labels.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/bifpn/labels.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema/args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/runs/ema/args.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema/labels.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/ema/labels.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/ema/train_batch0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/ema/train_batch0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/full/args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/runs/full/args.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/full/labels.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/runs/full/labels.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/2025-10-30-log" beforeDir="false" afterPath="$PROJECT_DIR$/log/2025-10-30-log-train" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline2/args.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline2/labels.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline2/train_batch2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline3/args.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/baseline3/labels.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/ema2/args.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/ema2/labels.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/ema2/train_batch0.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +49,25 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "SEMHAQ"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SEMHAQ/VisDrone_Experiment.git",
+    "accountId": "62f440a9-81e0-4c4e-8575-94edf90f1b0e"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
   <component name="ProjectId" id="34WVfzWB4RKnK6S4wfS9qXwOrb6" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -58,8 +78,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.evaluate_all_models.executor": "Run",
+    "Python.evaluate_all_models_fixed.executor": "Run",
+    "Python.test (1).executor": "Run",
+    "Python.train_ema_only.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Project/VisDrone_Experiment"
   }
 }]]></component>
@@ -72,20 +97,21 @@
       <recent name="E:\Project\VisDrone_Experiment\Yolov8\scripts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_ablation_study (1)">
-    <configuration name="hook_integration" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.train_ema_only">
+    <configuration name="evaluate_all_models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/hook_integration.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/evaluate_all_models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -94,19 +120,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="evaluate_all_models_fixed" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/evaluate_all_models_fixed.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -117,6 +144,7 @@
     </configuration>
     <configuration name="run_ablation_study (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -136,29 +164,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_ablation_study" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Project\VisDrone_Experiment\run_ablation_study.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -178,13 +186,57 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="E:\Project\VisDrone_Experiment\test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_ema_only" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/train_ema_only.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_ablation_study (1)" />
-        <item itemvalue="Python.hook_integration" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.run_ablation_study" />
-        <item itemvalue="Python.main" />
+        <item itemvalue="Python.train_ema_only" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.evaluate_all_models_fixed" />
+        <item itemvalue="Python.evaluate_all_models" />
       </list>
     </recent_temporary>
   </component>
