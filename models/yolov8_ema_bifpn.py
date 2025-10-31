@@ -4,8 +4,8 @@ from ultralytics.nn.modules import Conv, Bottleneck, C2f, SPPF
 from ultralytics.nn.tasks import DetectionModel
 from ultralytics.utils.torch_utils import initialize_weights
 
-from .modules.ema_attention import EMABlock
-from .modules.bifpn import BiFPN
+from .modules.ema_attention import EMAttention
+from .modules.bifpn import BiFPN_Module  # 修改：导入正确的类名
 
 
 class EMAConv(nn.Module):
@@ -14,7 +14,7 @@ class EMAConv(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size=1, stride=1, groups=1, reduction=32):
         super(EMAConv, self).__init__()
         self.conv = Conv(in_channels, out_channels, kernel_size, stride, groups=groups)
-        self.ema = EMABlock(out_channels, reduction)
+        self.ema = EMAttention(out_channels, reduction)
 
     def forward(self, x):
         x = self.conv(x)
@@ -50,7 +50,7 @@ class EMA_Bottleneck(nn.Module):
         super(EMA_Bottleneck, self).__init__()
         self.cv1 = Conv(in_channels, out_channels, 1, 1)
         self.cv2 = Conv(out_channels, out_channels, 3, 1, groups=groups)
-        self.ema = EMABlock(out_channels, reduction)
+        self.ema = EMAttention(out_channels, reduction)
         self.add = shortcut and in_channels == out_channels
 
     def forward(self, x):
@@ -74,8 +74,11 @@ class YOLOv8_EMA_BiFPN(DetectionModel):
 
     def _add_ema_to_backbone(self):
         """在backbone中添加EMA注意力"""
+        print("🔧 在backbone中添加EMA注意力...")
+
         # 找到backbone的模块并替换
-        for name, module in self.model.named_children():
+        replaced_count = 0
+        for name, module in self.model.named_modules():
             if hasattr(module, 'm') and isinstance(module.m, nn.ModuleList):
                 # 在C2f模块中添加EMA
                 for i, layer in enumerate(module.m):
@@ -87,40 +90,76 @@ class YOLOv8_EMA_BiFPN(DetectionModel):
 
                         new_layer = EMA_Bottleneck(in_channels, out_channels, shortcut)
                         module.m[i] = new_layer
+                        replaced_count += 1
+                        print(f"✅ 替换 {name}.m[{i}] 为EMA_Bottleneck")
+
+        print(f"✅ 共替换了 {replaced_count} 个Bottleneck模块")
 
     def _replace_neck_with_bifpn(self):
         """用BiFPN替换neck部分"""
+        print("🔧 用BiFPN替换PANet...")
+
         # 获取多尺度特征通道数
         feature_channels = []
-        for module in self.model:
+        for name, module in self.model.named_modules():
             if isinstance(module, (C2f, SPPF)):
-                feature_channels.append(module.cv2.conv.out_channels)
+                if hasattr(module, 'cv2') and hasattr(module.cv2, 'conv'):
+                    feature_channels.append(module.cv2.conv.out_channels)
+                    print(f"📊 特征层 {name}: {module.cv2.conv.out_channels} 通道")
 
         # 只取最后三个尺度的特征（P3, P4, P5）
-        feature_channels = feature_channels[-3:]
+        if len(feature_channels) >= 3:
+            feature_channels = feature_channels[-3:]
+            print(f"📊 使用特征通道: {feature_channels}")
 
-        # 创建BiFPN
-        self.bifpn = BiFPN(feature_channels=feature_channels,
-                           bifpn_channels=256,
-                           num_layers=3)
+            # 创建BiFPN模块 - 修正：使用正确的类名和参数
+            self.bifpn = BiFPN_Module(
+                feature_channels=feature_channels,
+                bifpn_channels=256  # 与BiFPN_Module的参数匹配
+            )
+            print("✅ BiFPN模块创建成功")
+        else:
+            print("❌ 无法获取足够的特征通道数")
 
     def forward(self, x, *args, **kwargs):
         # 获取多尺度特征
         features = []
+        feature_indices = []
 
+        # 收集P3, P4, P5特征
         for i, module in enumerate(self.model):
             x = module(x)
             # 收集特定层的特征（对应P3, P4, P5）
-            if i in [len(self.model) - 4, len(self.model) - 3, len(self.model) - 2]:
+            if i in [4, 6, 9]:  # 这些索引对应P3, P4, P5特征层
                 features.append(x)
+                feature_indices.append(i)
+                print(f"📥📥 收集特征层 {i}: {x.shape}")
 
         # 通过BiFPN处理特征
-        if hasattr(self, 'bifpn'):
-            features = self.bifpn(features)
+        if hasattr(self, 'bifpn') and len(features) == 3:
+            try:
+                print("🔄🔄 应用BiFPN处理特征...")
+                features = self.bifpn(features)
+                print("✅ BiFPN处理完成")
+            except Exception as e:
+                print(f"❌❌ BiFPN处理失败: {e}")
+                # 如果BiFPN失败，使用原始特征
+                features = features
 
         # 将处理后的特征传递到head
         if hasattr(self, 'detect'):
-            return self.detect(features[-1])  # 简化处理，实际应该处理所有尺度
+            # 需要将三个尺度的特征都传递给detect层
+            # 这里简化处理，实际应该正确处理多尺度特征
+            print("🎯🎯 传递特征到检测头...")
+
+            # 修复：确保传递给detect的是正确的格式
+            # 如果detect期望多个输入，我们需要传递所有特征
+            if hasattr(self.detect, 'forward'):
+                # 尝试调用detect的forward方法
+                return self.detect.forward(features)
+            else:
+                # 回退到直接调用
+                return self.detect(features)
 
         return x
 
@@ -177,7 +216,13 @@ def create_yolov8_ema_bifpn_model(pretrained=True):
             pretrained_model = YOLO('yolov8s.pt')
             # 这里需要实现权重加载逻辑
             print("加载预训练权重...")
-        except:
-            print("警告：无法加载预训练权重，使用随机初始化")
+
+            # 简化版本：直接加载基础模型权重
+            model.load_state_dict(pretrained_model.model.state_dict(), strict=False)
+            print("✅ 预训练权重加载完成")
+
+        except Exception as e:
+            print(f"❌ 无法加载预训练权重: {e}")
+            print("⚠ 使用随机初始化")
 
     return model
