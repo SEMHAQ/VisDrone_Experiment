@@ -1,0 +1,39 @@
+# runtime
+imgsz: 1024
+epochs: 300
+batch: 8
+workers: 4
+device: 0
+amp: true
+seed: 42
+optimizer: 'AdamW'
+lr0: 0.0025
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.01
+warmup_epochs: 10
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+cos_lr: true
+ema: true
+
+# aug
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 5.0
+translate: 0.1
+scale: 0.5
+shear: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 1.0          # 前期开启
+mixup: 0.1
+copy_paste: 0.0      # 基线不启用，后续消融再开
+# 多尺度训练（ultralytics v8 使用 imgsz * 随机比例；这里保持固定分辨率做基线）
+
+# loss / assigner
+box: 7.5
+cls: 0.5
+dfl: 1.5
+# 使用默认 SimOTA 与 CIoU/DFL 作为基线
