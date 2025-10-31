@@ -31,6 +31,35 @@ if not train_cfg.exists():
 print(f"数据配置: {data_yaml}")
 print(f"训练配置: {train_cfg}")
 
+# 检查数据完整性
+print("\n检查数据完整性...")
+base_path = project_root / "VisDrone2YOLO"
+for split in ['train', 'val']:
+    images_dir = base_path / f"VisDrone2019-DET-{split}" / "images"
+    labels_dir = base_path / f"VisDrone2019-DET-{split}" / "labels"
+    
+    if not images_dir.exists() or not labels_dir.exists():
+        print(f"✗ {split} 数据集目录不存在")
+        sys.exit(1)
+    
+    # 检查图片文件
+    image_files = list(images_dir.glob("*.jpg")) + list(images_dir.glob("*.png"))
+    label_files = list(labels_dir.glob("*.txt"))
+    
+    if len(image_files) == 0:
+        print(f"\n✗ 错误: {split} 的 images 目录为空！")
+        print(f"   请先下载 VisDrone 数据集的图片文件")
+        print(f"   图片应该放在: {images_dir}")
+        print(f"\n   下载地址: https://github.com/VisDrone/VisDrone-Dataset")
+        print(f"   需要下载: VisDrone2019-DET-{split}.zip")
+        sys.exit(1)
+    
+    if len(label_files) == 0:
+        print(f"✗ {split} 的 labels 目录为空")
+        sys.exit(1)
+    
+    print(f"✓ {split}: {len(image_files)} 张图片, {len(label_files)} 个标签")
+
 # 加载模型
 print("\n正在加载 YOLOv8s 模型...")
 try:
@@ -63,7 +92,6 @@ train_args = {
     'warmup_momentum': 0.8,
     'warmup_bias_lr': 0.1,
     'cos_lr': True,
-    'ema': True,
     'hsv_h': 0.015,
     'hsv_s': 0.7,
     'hsv_v': 0.4,
