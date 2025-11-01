@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="推翻重做">
-      <change beforePath="$PROJECT_DIR$/.idea/VisDrone_Experiment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VisDrone_Experiment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="baseline训练结束">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2YOLO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-test-dev/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-train/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-val/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/check_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/check_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_ultralytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_ultralytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +47,7 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="34WVfzWB4RKnK6S4wfS9qXwOrb6" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -88,10 +80,30 @@
       <recent name="E:\Project\VisDrone_Experiment\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train_baseline">
+  <component name="RunManager" selected="Python.eval_model">
+    <configuration name="eval_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="VisDrone_Experiment" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eval_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="evaluate_all_models_fixed" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -113,7 +125,6 @@
     </configuration>
     <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -135,7 +146,6 @@
     </configuration>
     <configuration name="train_baseline" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -155,31 +165,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_ema_bifpn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/train_ema_bifpn.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests in test_ultralytics.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -194,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.eval_model" />
         <item itemvalue="Python.train_baseline" />
         <item itemvalue="Python tests.Python tests in test_ultralytics.py" />
         <item itemvalue="Python.evaluate_all_models_fixed" />
         <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python.train_ema_bifpn" />
       </list>
     </recent_temporary>
   </component>
