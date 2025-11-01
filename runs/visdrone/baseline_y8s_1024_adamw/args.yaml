@@ -13,7 +13,7 @@ cache: false
 device: '0'
 workers: 0
 project: runs/visdrone
-name: baseline_y8s_1024_adamw7
+name: baseline_y8s_1024_adamw
 exist_ok: false
 pretrained: true
 optimizer: AdamW
