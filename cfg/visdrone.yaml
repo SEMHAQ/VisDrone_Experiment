@@ -1,5 +1,5 @@
 # VisDrone YOLO-format dataset
-path: E:/Project/VisDrone_Experiment/VisDrone2YOLO
+path: D:/Project/VisDrone_Experiment/VisDrone2YOLO
 train: VisDrone2019-DET-train/images
 val: VisDrone2019-DET-val/images
 test: VisDrone2019-DET-test-dev/images  # 可选

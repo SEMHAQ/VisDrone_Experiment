@@ -83,7 +83,7 @@ def main():
         'project': 'runs/visdrone',
         'name': 'baseline_y8s_1024_adamw',
         'imgsz': 1024,
-        'epochs': 300,
+        'epochs': 30,
         'batch': 8,
         'workers': workers,
         'device': 0,
