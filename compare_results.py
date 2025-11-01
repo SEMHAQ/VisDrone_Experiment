@@ -45,6 +45,7 @@ def main():
     if not bifpn_weights.exists():
         # 尝试查找其他可能的路径
         bifpn_dirs = list((project_root / "runs" / "visdrone").glob("*bifpn*"))
+        bifpn_dirs = [d for d in bifpn_dirs if 'dcn' not in d.name.lower()]  # 排除 DCN
         if bifpn_dirs:
             bifpn_weights = bifpn_dirs[0] / "weights" / "best.pt"
     
@@ -52,6 +53,19 @@ def main():
         models_to_eval.append(("P2+BiFPN (YOLOv8s-P2-BiFPN)", bifpn_weights))
     else:
         print(f"⚠ 提示: P2+BiFPN 模型权重不存在（可能还在训练中）")
+    
+    # P2 + BiFPN + DCNv2 模型
+    dcn_weights = project_root / "runs" / "visdrone" / "y8s_p2_bifpn_dcn_1024_adamw" / "weights" / "best.pt"
+    if not dcn_weights.exists():
+        # 尝试查找其他可能的路径
+        dcn_dirs = list((project_root / "runs" / "visdrone").glob("*dcn*"))
+        if dcn_dirs:
+            dcn_weights = dcn_dirs[0] / "weights" / "best.pt"
+    
+    if dcn_weights.exists():
+        models_to_eval.append(("P2+BiFPN+DCN (YOLOv8s-P2-BiFPN-DCN)", dcn_weights))
+    else:
+        print(f"⚠ 提示: P2+BiFPN+DCN 模型权重不存在（可能还在训练中）")
     
     if len(models_to_eval) == 0:
         print("错误: 找不到任何模型权重文件")
