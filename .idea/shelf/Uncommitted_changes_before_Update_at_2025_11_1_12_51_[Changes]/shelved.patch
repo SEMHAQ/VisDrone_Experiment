@@ -1,0 +1,32 @@
+Index: check_data.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/usr/bin/env python\r\n# -*- coding: utf-8 -*-\r\n\"\"\"\r\n检查 VisDrone 数据完整性\r\n验证图片和标签文件是否匹配\r\n\"\"\"\r\nimport os\r\nfrom pathlib import Path\r\n\r\ndef check_dataset_split(split_name, base_path):\r\n    \"\"\"检查某个数据集分割（train/val/test）的完整性\"\"\"\r\n    split_path = Path(base_path) / f\"VisDrone2019-DET-{split_name}\"\r\n    images_dir = split_path / \"images\"\r\n    labels_dir = split_path / \"labels\"\r\n    annotations_dir = split_path / \"annotations\"\r\n    \r\n    print(f\"\\n{'='*60}\")\r\n    print(f\"检查 {split_name} 数据集\")\r\n    print(f\"{'='*60}\")\r\n    \r\n    # 检查目录是否存在\r\n    if not images_dir.exists():\r\n        print(f\"✗ images 目录不存在: {images_dir}\")\r\n        return False\r\n    if not labels_dir.exists():\r\n        print(f\"✗ labels 目录不存在: {labels_dir}\")\r\n        return False\r\n    \r\n    # 获取图片文件（支持 .jpg, .png）\r\n    image_extensions = ['.jpg', '.jpeg', '.png', '.bmp']\r\n    image_files = []\r\n    for ext in image_extensions:\r\n        image_files.extend(list(images_dir.glob(f\"*{ext}\")))\r\n        image_files.extend(list(images_dir.glob(f\"*{ext.upper()}\")))\r\n    \r\n    # 获取标签文件\r\n    label_files = list(labels_dir.glob(\"*.txt\"))\r\n    \r\n    print(f\"✓ images 目录: {images_dir}\")\r\n    print(f\"  - 找到图片文件: {len(image_files)} 个\")\r\n    print(f\"✓ labels 目录: {labels_dir}\")\r\n    print(f\"  - 找到标签文件: {len(label_files)} 个\")\r\n    \r\n    if len(image_files) == 0:\r\n        print(f\"\\n⚠ 警告: {split_name} 的 images 目录为空！\")\r\n        print(f\"  请下载 VisDrone 数据集的图片文件并放入: {images_dir}\")\r\n        return False\r\n    \r\n    if len(label_files) == 0:\r\n        print(f\"\\n⚠ 警告: {split_name} 的 labels 目录为空！\")\r\n        return False\r\n    \r\n    # 检查匹配情况\r\n    image_stems = {f.stem for f in image_files}\r\n    label_stems = {f.stem for f in label_files}\r\n    \r\n    matched = image_stems & label_stems\r\n    only_images = image_stems - label_stems\r\n    only_labels = label_stems - image_stems\r\n    \r\n    print(f\"\\n匹配情况:\")\r\n    print(f\"  - 图片和标签匹配: {len(matched)} 对\")\r\n    if only_images:\r\n        print(f\"  - 只有图片没有标签: {len(only_images)} 个 (前5个: {list(only_images)[:5]})\")\r\n    if only_labels:\r\n        print(f\"  - 只有标签没有图片: {len(only_labels)} 个 (前5个: {list(only_labels)[:5]})\")\r\n    \r\n    if len(matched) == 0:\r\n        print(f\"\\n✗ 错误: 没有找到匹配的图片-标签对！\")\r\n        return False\r\n    \r\n    print(f\"✓ {split_name} 数据集检查通过！\")\r\n    return True\r\n\r\ndef main():\r\n    base_path = Path(__file__).parent / \"VisDrone2YOLO\"\r\n    \r\n    if not base_path.exists():\r\n        print(f\"✗ VisDrone2YOLO 目录不存在: {base_path}\")\r\n        return\r\n    \r\n    print(\"VisDrone 数据集完整性检查\")\r\n    print(f\"基础路径: {base_path}\")\r\n    \r\n    results = []\r\n    for split in ['train', 'val', 'test-dev']:\r\n        results.append(check_dataset_split(split, base_path))\r\n    \r\n    print(f\"\\n{'='*60}\")\r\n    print(\"检查总结\")\r\n    print(f\"{'='*60}\")\r\n    if all(results):\r\n        print(\"✓ 所有数据集分割检查通过，可以开始训练！\")\r\n    else:\r\n        print(\"✗ 部分数据集分割存在问题，请先解决后再训练\")\r\n        print(\"\\n下载 VisDrone 图片的说明:\")\r\n        print(\"1. 访问: https://github.com/VisDrone/VisDrone-Dataset\")\r\n        print(\"2. 下载对应的图片压缩包:\")\r\n        print(\"   - VisDrone2019-DET-train.zip (训练集图片)\")\r\n        print(\"   - VisDrone2019-DET-val.zip (验证集图片)\")\r\n        print(\"   - VisDrone2019-DET-test-dev.zip (测试集图片)\")\r\n        print(\"3. 解压后，将图片文件（.jpg）放入对应的 images 目录\")\r\n\r\nif __name__ == \"__main__\":\r\n    main()\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/check_data.py b/check_data.py
+--- a/check_data.py	(revision 43901b8afd1405c0c4e89c2b7bb766e6c8a573e1)
++++ b/check_data.py	(date 1761972461026)
+@@ -104,3 +104,5 @@
+ if __name__ == "__main__":
+     main()
+ 
++
++
+Index: test_ultralytics.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/usr/bin/env python\r\n# -*- coding: utf-8 -*-\r\n\"\"\"测试 ultralytics 是否正常工作\"\"\"\r\n\r\nimport sys\r\nprint(\"Python 版本:\", sys.version)\r\nprint(\"Python 路径:\", sys.executable)\r\n\r\ntry:\r\n    import ultralytics\r\n    print(\"✓ ultralytics 已安装, 版本:\", ultralytics.__version__)\r\nexcept ImportError as e:\r\n    print(\"✗ ultralytics 未安装或导入失败:\", e)\r\n    sys.exit(1)\r\n\r\ntry:\r\n    import torch\r\n    print(\"✓ torch 已安装, 版本:\", torch.__version__)\r\n    print(\"✓ CUDA 可用:\", torch.cuda.is_available())\r\n    if torch.cuda.is_available():\r\n        print(\"✓ GPU 设备:\", torch.cuda.get_device_name(0))\r\nexcept ImportError as e:\r\n    print(\"✗ torch 未安装或导入失败:\", e)\r\n    sys.exit(1)\r\n\r\nprint(\"\\n测试 ultralytics YOLO 基础功能...\")\r\ntry:\r\n    from ultralytics import YOLO\r\n    model = YOLO('yolov8s.pt')\r\n    print(\"✓ YOLOv8s 模型加载成功\")\r\nexcept Exception as e:\r\n    print(\"✗ 模型加载失败:\", e)\r\n    import traceback\r\n    traceback.print_exc()\r\n\r\nprint(\"\\n测试完成！\")\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test_ultralytics.py b/test_ultralytics.py
+--- a/test_ultralytics.py	(revision 43901b8afd1405c0c4e89c2b7bb766e6c8a573e1)
++++ b/test_ultralytics.py	(date 1761972460984)
+@@ -35,3 +35,5 @@
+ 
+ print("\n测试完成！")
+ 
++
++
