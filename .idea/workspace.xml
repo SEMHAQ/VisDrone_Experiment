@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="修改P2" />
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="修改P2">
+      <change afterPath="$PROJECT_DIR$/VisDrone2YOLO/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-test-dev/images/Add_images_here.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-train/images/Add_images_here.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-val/images/Add_images_here.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cfg/models/yolov8s-p2.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cfg/models/yolov8s-p2.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +30,7 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/VisDrone2YOLO" />
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -276,7 +283,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761975929454</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761975998657</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1761975998657</updated>
+    </task>
+    <task id="LOCAL-00011" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761976381366</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1761976381366</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
