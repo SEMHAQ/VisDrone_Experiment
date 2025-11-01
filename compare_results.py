@@ -16,29 +16,42 @@ def main():
     # 数据配置文件
     data_yaml = project_root / "cfg" / "visdrone.yaml"
     
-    # 查找模型权重
-    baseline_weights = project_root / "runs" / "visdrone" / "baseline_y8s_1024_adamw" / "weights" / "best.pt"
-    p2_weights = project_root / "runs" / "visdrone" / "y8s_p2_1024_adamw_bs4" / "weights" / "best.pt"
-    
-    # 检查权重文件是否存在
+    # 查找模型权重（支持多个模型对比）
     models_to_eval = []
     
+    # Baseline 模型
+    baseline_weights = project_root / "runs" / "visdrone" / "baseline_y8s_1024_adamw" / "weights" / "best.pt"
     if baseline_weights.exists():
         models_to_eval.append(("Baseline (YOLOv8s)", baseline_weights))
     else:
         print(f"⚠ 警告: 基线模型权重不存在: {baseline_weights}")
     
+    # P2 模型
+    p2_weights = project_root / "runs" / "visdrone" / "y8s_p2_1024_adamw_bs4" / "weights" / "best.pt"
+    if not p2_weights.exists():
+        # 尝试查找其他可能的路径
+        p2_dirs = list((project_root / "runs" / "visdrone").glob("y8s_p2*"))
+        p2_dirs = [d for d in p2_dirs if 'bifpn' not in d.name.lower()]  # 排除 BiFPN
+        if p2_dirs:
+            p2_weights = p2_dirs[0] / "weights" / "best.pt"
+    
     if p2_weights.exists():
         models_to_eval.append(("P2 Model (YOLOv8s-P2)", p2_weights))
     else:
-        print(f"⚠ 警告: P2 模型权重不存在: {p2_weights}")
+        print(f"⚠ 警告: P2 模型权重不存在")
+    
+    # P2 + BiFPN 模型
+    bifpn_weights = project_root / "runs" / "visdrone" / "y8s_p2_bifpn_1024_adamw" / "weights" / "best.pt"
+    if not bifpn_weights.exists():
         # 尝试查找其他可能的路径
-        p2_dirs = list((project_root / "runs" / "visdrone").glob("y8s_p2*"))
-        if p2_dirs:
-            p2_weights = p2_dirs[0] / "weights" / "best.pt"
-            if p2_weights.exists():
-                models_to_eval.append(("P2 Model", p2_weights))
-                print(f"找到 P2 模型: {p2_weights}")
+        bifpn_dirs = list((project_root / "runs" / "visdrone").glob("*bifpn*"))
+        if bifpn_dirs:
+            bifpn_weights = bifpn_dirs[0] / "weights" / "best.pt"
+    
+    if bifpn_weights.exists():
+        models_to_eval.append(("P2+BiFPN (YOLOv8s-P2-BiFPN)", bifpn_weights))
+    else:
+        print(f"⚠ 提示: P2+BiFPN 模型权重不存在（可能还在训练中）")
     
     if len(models_to_eval) == 0:
         print("错误: 找不到任何模型权重文件")
@@ -110,9 +123,16 @@ def main():
         print("=" * 70)
         
         baseline = results_summary[0]
-        p2 = results_summary[1]
+        other_models = results_summary[1:]
         
-        print(f"\n{'指标':<20} {'Baseline':<15} {'P2 Model':<15} {'提升':<15}")
+        # 构建表头
+        header = f"{'指标':<20}"
+        for model_name, _ in models_to_eval:
+            short_name = model_name.split('(')[0].strip() if '(' in model_name else model_name[:12]
+            header += f" {short_name:<18}"
+        if len(other_models) > 0:
+            header += f" {'vs Baseline':<15}"
+        print(header)
         print("-" * 70)
         
         metrics = [
@@ -124,15 +144,25 @@ def main():
         ]
         
         for metric_name, metric_key in metrics:
+            row = f"{metric_name:<20}"
             baseline_val = baseline[metric_key]
-            p2_val = p2[metric_key]
-            improvement = p2_val - baseline_val
-            improvement_pct = (improvement / baseline_val * 100) if baseline_val > 0 else 0
+            row += f" {baseline_val:<18.4f}"
             
-            print(f"{metric_name:<20} {baseline_val:<15.4f} {p2_val:<15.4f} {improvement:+.4f} ({improvement_pct:+.2f}%)")
+            for other_model in other_models:
+                other_val = other_model[metric_key]
+                row += f" {other_val:<18.4f}"
+            
+            # 计算相对基线的提升
+            if len(other_models) > 0:
+                best_val = max([m[metric_key] for m in other_models])
+                improvement = best_val - baseline_val
+                improvement_pct = (improvement / baseline_val * 100) if baseline_val > 0 else 0
+                row += f" {improvement:+.4f} ({improvement_pct:+.2f}%)"
+            
+            print(row)
         
         # 小目标类别对比
-        if 'class_aps' in baseline and 'class_aps' in p2:
+        if 'class_aps' in baseline:
             print("\n" + "-" * 70)
             print("小目标类别详细对比 (mAP50-95)")
             print("-" * 70)
@@ -140,23 +170,50 @@ def main():
             small_target_classes = ['pedestrian', 'people', 'bicycle', 'motor', 'tricycle', 'awning-tricycle']
             
             for cls in small_target_classes:
-                if cls in baseline['class_aps'] and cls in p2['class_aps']:
+                if cls in baseline['class_aps']:
+                    row = f"{cls:<20}"
                     baseline_ap = baseline['class_aps'][cls]
-                    p2_ap = p2['class_aps'][cls]
-                    improvement = p2_ap - baseline_ap
-                    improvement_pct = (improvement / baseline_ap * 100) if baseline_ap > 0 else 0
+                    row += f" {baseline_ap:<18.4f}"
                     
-                    print(f"{cls:<20} {baseline_ap:<15.4f} {p2_ap:<15.4f} {improvement:+.4f} ({improvement_pct:+.2f}%)")
+                    best_improvement = 0
+                    for other_model in other_models:
+                        if 'class_aps' in other_model and cls in other_model['class_aps']:
+                            other_ap = other_model['class_aps'][cls]
+                            row += f" {other_ap:<18.4f}"
+                            improvement = other_ap - baseline_ap
+                            if improvement > best_improvement:
+                                best_improvement = improvement
+                        else:
+                            row += f" {'N/A':<18}"
+                    
+                    if best_improvement != 0:
+                        improvement_pct = (best_improvement / baseline_ap * 100) if baseline_ap > 0 else 0
+                        row += f" {best_improvement:+.4f} ({improvement_pct:+.2f}%)"
+                    
+                    print(row)
         
         print("\n" + "=" * 70)
         print("结论:")
-        overall_improvement = p2['map50_95'] - baseline['map50_95']
-        if overall_improvement > 0.01:
-            print(f"✓ P2 模型相比基线有显著提升 (+{overall_improvement:.4f} mAP50-95)")
-        elif overall_improvement > 0:
-            print(f"✓ P2 模型相比基线有轻微提升 (+{overall_improvement:.4f} mAP50-95)")
-        else:
-            print(f"⚠ P2 模型相比基线下降了 ({overall_improvement:.4f} mAP50-95)")
+        baseline_map = baseline['map50_95']
+        
+        for i, other_model in enumerate(other_models):
+            model_name = other_models[i]['model_name']
+            improvement = other_model['map50_95'] - baseline_map
+            
+            if improvement > 0.01:
+                print(f"✓ {model_name} 相比基线有显著提升 (+{improvement:.4f} mAP50-95, +{improvement/baseline_map*100:.1f}%)")
+            elif improvement > 0:
+                print(f"✓ {model_name} 相比基线有轻微提升 (+{improvement:.4f} mAP50-95, +{improvement/baseline_map*100:.1f}%)")
+            elif improvement > -0.01:
+                print(f"≈ {model_name} 相比基线基本持平 ({improvement:+.4f} mAP50-95)")
+            else:
+                print(f"⚠ {model_name} 相比基线下降了 ({improvement:.4f} mAP50-95, {improvement/baseline_map*100:.1f}%)")
+        
+        # 找出最佳模型
+        if len(other_models) > 0:
+            best_model = max(other_models, key=lambda x: x['map50_95'])
+            print(f"\n🏆 最佳模型: {best_model['model_name']} (mAP50-95: {best_model['map50_95']:.4f})")
+        
         print("=" * 70)
     
     # 保存结果到文件

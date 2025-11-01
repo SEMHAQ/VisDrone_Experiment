@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="p2训练结束待验证">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="验证对比文件" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -285,7 +283,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761975929454</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="验证对比文件">
+      <option name="closed" value="true" />
+      <created>1762012371180</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762012371180</updated>
+    </task>
+    <task id="LOCAL-00011" summary="验证对比文件">
+      <option name="closed" value="true" />
+      <created>1762013333172</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762013333172</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -320,6 +334,7 @@
     <MESSAGE value="baseline验证结束" />
     <MESSAGE value="验证代码" />
     <MESSAGE value="修改P2" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改P2" />
+    <MESSAGE value="验证对比文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="验证对比文件" />
   </component>
 </project>
