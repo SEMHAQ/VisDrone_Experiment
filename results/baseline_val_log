@@ -1,0 +1,57 @@
+D:\VoiceRecognition\VoiceprintRecognition-Pytorch\venv\Scripts\python.exe D:\Project\VisDrone_Experiment\eval_model.py
+工作目录: D:\Project\VisDrone_Experiment
+找到训练权重: D:\Project\VisDrone_Experiment\runs\visdrone\baseline_y8s_1024_adamw\weights\best.pt
+
+正在加载模型: D:\Project\VisDrone_Experiment\runs\visdrone\baseline_y8s_1024_adamw\weights\best.pt
+✓ 模型加载成功
+
+开始评估...
+============================================================
+模型: D:\Project\VisDrone_Experiment\runs\visdrone\baseline_y8s_1024_adamw\weights\best.pt
+数据: D:\Project\VisDrone_Experiment\cfg\visdrone.yaml
+图像尺寸: 1024
+置信度阈值: 0.25
+IoU 阈值: 0.7
+============================================================
+WARNING 'save_hybrid' is deprecated and will be removed in in the future.
+Ultralytics 8.3.146  Python-3.9.13 torch-2.2.2+cu118 CUDA:0 (NVIDIA GeForce RTX 3060, 12288MiB)
+Model summary (fused): 72 layers, 11,129,454 parameters, 0 gradients, 28.5 GFLOPs
+val: Fast image access  (ping: 0.10.0 ms, read: 1360.4437.2 MB/s, size: 185.1 KB)
+val: Scanning D:\Project\VisDrone_Experiment\VisDrone2YOLO\VisDrone2019-DET-val\labels.cache... 548 images, 0 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 548/548 [00:16<00:00, 32.60it/s]
+                   all        548      38759      0.594      0.465      0.537      0.345
+            pedestrian        520       8844      0.655      0.507      0.615      0.322
+                people        482       5125      0.629      0.401      0.516      0.246
+               bicycle        364       1287      0.364      0.282      0.311      0.168
+                   car        515      14064      0.798      0.828      0.862      0.626
+                   van        421       1975      0.621      0.519      0.583       0.43
+                 truck        266        750      0.557      0.444      0.512       0.37
+              tricycle        337       1045      0.536      0.346       0.43      0.276
+       awning-tricycle        220        532      0.336      0.229      0.241      0.168
+                   bus        131        251      0.807       0.55      0.702      0.528
+                 motor        485       4886      0.639      0.545      0.601      0.316
+Speed: 0.6ms preprocess, 10.9ms inference, 0.0ms loss, 1.5ms postprocess per image
+Results saved to D:\VoiceRecognition\VoiceprintRecognition-Pytorch\runs\detect\val7
+
+============================================================
+评估结果摘要
+============================================================
+mAP50: 0.5372
+mAP50-95: 0.3449
+
+每个类别的 mAP50-95:
+  pedestrian: 0.3221
+  people: 0.2457
+  bicycle: 0.1684
+  car: 0.6257
+  van: 0.4304
+  truck: 0.3698
+  tricycle: 0.2757
+  awning-tricycle: 0.1680
+  bus: 0.5279
+  motor: 0.3159
+
+详细结果保存在: D:\VoiceRecognition\VoiceprintRecognition-Pytorch\runs\detect\val7
+============================================================
+
+Process finished with exit code 0
