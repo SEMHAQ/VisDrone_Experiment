@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="baseline验证结束">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2YOLO" afterDir="false" />
-    </list>
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="验证代码" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -255,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761973813316</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="验证代码">
+      <option name="closed" value="true" />
+      <created>1761974854979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761974854979</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,7 +274,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -288,6 +293,7 @@
     <MESSAGE value="第三次实验结果未出 此次push为测试前两个实验模型效果" />
     <MESSAGE value="推翻重做" />
     <MESSAGE value="baseline验证结束" />
-    <option name="LAST_COMMIT_MESSAGE" value="baseline验证结束" />
+    <MESSAGE value="验证代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="验证代码" />
   </component>
 </project>

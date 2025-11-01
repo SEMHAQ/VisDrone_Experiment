@@ -2,8 +2,8 @@
 # depth/width 保持与 y8s 一致，方便公平对比
 nc: 10  # 按你的数据集类别数修改
 scales:
-  # v8s: depth 0.33, width 0.50
-  s: [0.33, 0.50]
+  # v8s: depth 0.33, width 0.50, max_channels (通常不需要指定，但格式需要3个值)
+  s: [0.33, 0.50, 1024]
 
 backbone:
   # [from, number, module, args]
@@ -49,4 +49,5 @@ head:
   - [-1, 3, C2f, [1024]]              # P5''
 
   # Detect 层：新增 P2 分支，通道对应 [P2', P3'', P4'', P5'']
-  - [[12, 15, 18, 21], 1, Detect, [nc]]  # strides: [4, 8, 16, 32]
+  # 索引需要根据实际层数调整，先使用相对索引测试
+  - [[-4, -7, -10, -13], 1, Detect, [nc]]  # strides: [4, 8, 16, 32]
