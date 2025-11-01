@@ -80,6 +80,19 @@ def main():
     else:
         print(f"⚠ 提示: P2+BiFPN+CARAFE 模型权重不存在（可能还在训练中）")
     
+    # 最终改进模型
+    final_weights = project_root / "runs" / "visdrone" / "y8s_p2_bifpn_final_improved" / "weights" / "best.pt"
+    if not final_weights.exists():
+        # 尝试查找其他可能的路径
+        final_dirs = list((project_root / "runs" / "visdrone").glob("*final*"))
+        if final_dirs:
+            final_weights = final_dirs[0] / "weights" / "best.pt"
+    
+    if final_weights.exists():
+        models_to_eval.append(("Final Improved (P2+BiFPN+CopyPaste)", final_weights))
+    else:
+        print(f"⚠ 提示: 最终改进模型权重不存在（可能还在训练中）")
+    
     if len(models_to_eval) == 0:
         print("错误: 找不到任何模型权重文件")
         sys.exit(1)
