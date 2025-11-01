@@ -90,7 +90,7 @@ def main():
         'project': 'runs/visdrone',
         'name': 'y8s_p2_1024_adamw_bs4',  # 更新名称以反映配置
         'imgsz': imgsz,
-        'epochs': 300,
+        'epochs': 30,
         'batch': batch_size,
         'workers': workers,
         'device': 0,

@@ -1,0 +1,149 @@
+Index: train_p2.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#!/usr/bin/env python\r\n# -*- coding: utf-8 -*-\r\n\"\"\"\r\n训练脚本 - YOLOv8s with P2 Detection Head\r\n添加 stride=4 的 P2 检测头以提升小目标检测能力\r\n\"\"\"\r\nimport os\r\nimport sys\r\nfrom pathlib import Path\r\n\r\ndef main():\r\n    # 确保在项目根目录\r\n    project_root = Path(__file__).parent.absolute()\r\n    os.chdir(project_root)\r\n    print(f\"工作目录: {project_root}\")\r\n\r\n    from ultralytics import YOLO\r\n\r\n    # 配置文件路径\r\n    data_yaml = project_root / \"cfg\" / \"visdrone.yaml\"\r\n    model_yaml = project_root / \"cfg\" / \"models\" / \"yolov8s-p2.yaml\"\r\n\r\n    # 检查配置文件是否存在\r\n    if not data_yaml.exists():\r\n        print(f\"错误: 数据配置文件不存在: {data_yaml}\")\r\n        sys.exit(1)\r\n\r\n    if not model_yaml.exists():\r\n        print(f\"错误: 模型配置文件不存在: {model_yaml}\")\r\n        sys.exit(1)\r\n\r\n    print(f\"数据配置: {data_yaml}\")\r\n    print(f\"模型配置: {model_yaml}\")\r\n\r\n    # 检查数据完整性\r\n    print(\"\\n检查数据完整性...\")\r\n    base_path = project_root / \"VisDrone2YOLO\"\r\n    for split in ['train', 'val']:\r\n        images_dir = base_path / f\"VisDrone2019-DET-{split}\" / \"images\"\r\n        labels_dir = base_path / f\"VisDrone2019-DET-{split}\" / \"labels\"\r\n        \r\n        if not images_dir.exists() or not labels_dir.exists():\r\n            print(f\"✗ {split} 数据集目录不存在\")\r\n            sys.exit(1)\r\n        \r\n        image_files = list(images_dir.glob(\"*.jpg\")) + list(images_dir.glob(\"*.png\"))\r\n        label_files = list(labels_dir.glob(\"*.txt\"))\r\n        \r\n        if len(image_files) == 0:\r\n            print(f\"\\n✗ 错误: {split} 的 images 目录为空！\")\r\n            sys.exit(1)\r\n        \r\n        if len(label_files) == 0:\r\n            print(f\"✗ {split} 的 labels 目录为空\")\r\n            sys.exit(1)\r\n        \r\n        print(f\"✓ {split}: {len(image_files)} 张图片, {len(label_files)} 个标签\")\r\n\r\n    # 加载模型（从配置文件创建）\r\n    print(\"\\n正在加载 YOLOv8s-P2 模型...\")\r\n    try:\r\n        model = YOLO(str(model_yaml))\r\n        print(\"✓ 模型加载成功\")\r\n        print(f\"  检测层数: 4 (P2, P3, P4, P5)\")\r\n        print(f\"  检测步长: [4, 8, 16, 32]\")\r\n    except Exception as e:\r\n        print(f\"✗ 模型加载失败: {e}\")\r\n        import traceback\r\n        traceback.print_exc()\r\n        sys.exit(1)\r\n\r\n    # 训练参数（与基线保持一致，便于对比）\r\n    import platform\r\n    is_windows = platform.system() == 'Windows'\r\n    workers = 0 if is_windows else 4\r\n    \r\n    train_args = {\r\n        'data': str(data_yaml),\r\n        'project': 'runs/visdrone',\r\n        'name': 'y8s_p2_1024_adamw',\r\n        'imgsz': 1024,\r\n        'epochs': 300,\r\n        'batch': 8,\r\n        'workers': workers,\r\n        'device': 0,\r\n        'amp': True,\r\n        'seed': 42,\r\n        'optimizer': 'AdamW',\r\n        'lr0': 0.0025,\r\n        'lrf': 0.01,\r\n        'momentum': 0.937,\r\n        'weight_decay': 0.01,\r\n        'warmup_epochs': 10,\r\n        'warmup_momentum': 0.8,\r\n        'warmup_bias_lr': 0.1,\r\n        'cos_lr': True,\r\n        'hsv_h': 0.015,\r\n        'hsv_s': 0.7,\r\n        'hsv_v': 0.4,\r\n        'degrees': 5.0,\r\n        'translate': 0.1,\r\n        'scale': 0.5,\r\n        'fliplr': 0.5,\r\n        'mosaic': 1.0,\r\n        'mixup': 0.1,\r\n        'copy_paste': 0.0,\r\n        'box': 7.5,\r\n        'cls': 0.5,\r\n        'dfl': 1.5,\r\n    }\r\n\r\n    print(\"\\n开始训练 YOLOv8s-P2...\")\r\n    print(\"=\" * 60)\r\n    print(f\"项目: {train_args['project']}\")\r\n    print(f\"实验名: {train_args['name']}\")\r\n    print(f\"改进: +P2 Detection Head (stride=4)\")\r\n    print(f\"图像尺寸: {train_args['imgsz']}\")\r\n    print(f\"批次大小: {train_args['batch']}\")\r\n    print(f\"工作进程数: {train_args['workers']} ({'单进程模式' if is_windows else '多进程模式'})\")\r\n    print(f\"总轮数: {train_args['epochs']}\")\r\n    print(\"=\" * 60)\r\n\r\n    try:\r\n        results = model.train(**train_args)\r\n        print(\"\\n✓ 训练完成！\")\r\n        print(f\"最佳权重保存在: {results.save_dir}\")\r\n        print(\"\\n建议下一步:\")\r\n        print(f\"  运行评估: python eval_model.py {results.save_dir}/weights/best.pt\")\r\n    except Exception as e:\r\n        print(f\"\\n✗ 训练失败: {e}\")\r\n        import traceback\r\n        traceback.print_exc()\r\n        sys.exit(1)\r\n\r\nif __name__ == '__main__':\r\n    main()\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/train_p2.py b/train_p2.py
+--- a/train_p2.py	(revision 877dd6a4462e3c69dcdab2bd0c57d8e550c06aee)
++++ b/train_p2.py	(date 1761975119903)
+@@ -79,7 +79,7 @@
+         'project': 'runs/visdrone',
+         'name': 'y8s_p2_1024_adamw',
+         'imgsz': 1024,
+-        'epochs': 300,
++        'epochs': 30,
+         'batch': 8,
+         'workers': workers,
+         'device': 0,
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ff4f5221-f6a2-4741-b819-4e91e54a00b0\" name=\"Changes\" comment=\"baseline验证结束\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/VisDrone2YOLO\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/VisDrone2YOLO\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;SEMHAQ&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/SEMHAQ/VisDrone_Experiment.git&quot;,\r\n    &quot;accountId&quot;: &quot;62f440a9-81e0-4c4e-8575-94edf90f1b0e&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"34WVfzWB4RKnK6S4wfS9qXwOrb6\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.evaluate_all_models.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.evaluate_all_models_fixed.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.train_bifpn_only.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.train_ema_bifpn.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.train_ema_only.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.train_full_model.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Project/VisDrone_Experiment/results&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Project\\VisDrone_Experiment\\results\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\Project\\VisDrone_Experiment\\scripts\" />\r\n      <recent name=\"E:\\Project\\VisDrone_Experiment\" />\r\n      <recent name=\"E:\\Project\\VisDrone_Experiment\\experiments\" />\r\n      <recent name=\"E:\\Project\\VisDrone_Experiment\\configs\\experiments\" />\r\n      <recent name=\"E:\\Project\\VisDrone_Experiment\\utils\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.eval_model\">\r\n    <configuration name=\"eval_model\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"VisDrone_Experiment\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/eval_model.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"evaluate_all_models_fixed\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"VisDrone_Experiment\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/scripts\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/scripts/evaluate_all_models_fixed.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"train_baseline\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"VisDrone_Experiment\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/train_baseline.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Python tests in test_inference.py\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"VisDrone_Experiment\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;$PROJECT_DIR$/test_inference.py&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Python tests in test_ultralytics.py\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"VisDrone_Experiment\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;$PROJECT_DIR$/test_ultralytics.py&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.eval_model\" />\r\n        <item itemvalue=\"Python tests.Python tests in test_inference.py\" />\r\n        <item itemvalue=\"Python.train_baseline\" />\r\n        <item itemvalue=\"Python tests.Python tests in test_ultralytics.py\" />\r\n        <item itemvalue=\"Python.evaluate_all_models_fixed\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ff4f5221-f6a2-4741-b819-4e91e54a00b0\" name=\"Changes\" comment=\"\" />\r\n      <created>1761329421546</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1761329421546</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761838073084</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761838073084</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"第一次实验失败 仅仅跑出baseline 此版本为跑ema单次和bifpn单次的测试实验\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761840092823</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761840092823</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"初次修复 待验证\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761889920329</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761889920329</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"第三次实验结果未出 此次push为测试前两个实验模型效果\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761926019908</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761926019908</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"推翻重做\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761927621714</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761927621714</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"baseline验证结束\">\r\n      <created>1761973813316</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761973813316</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"main\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"第一次实验失败 仅仅跑出baseline 此版本为跑ema单次的测试实验\" />\r\n    <MESSAGE value=\"第一次实验失败 仅仅跑出baseline 此版本为跑ema单次和bifpn单次的测试实验\" />\r\n    <MESSAGE value=\"初次修复 待验证\" />\r\n    <MESSAGE value=\"第三次实验结果未出 此次push为测试前两个实验模型效果\" />\r\n    <MESSAGE value=\"推翻重做\" />\r\n    <MESSAGE value=\"baseline验证结束\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"baseline验证结束\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 877dd6a4462e3c69dcdab2bd0c57d8e550c06aee)
++++ b/.idea/workspace.xml	(date 1761975142181)
+@@ -5,8 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="baseline验证结束">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/VisDrone2YOLO" beforeDir="false" afterPath="$PROJECT_DIR$/VisDrone2YOLO" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/train_p2.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_p2.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -49,7 +49,7 @@
+   &quot;associatedIndex&quot;: 0
+ }</component>
+   <component name="ProjectId" id="34WVfzWB4RKnK6S4wfS9qXwOrb6" />
+-  <component name="ProjectLevelVcsManager">
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+   </component>
+   <component name="ProjectViewState">
+@@ -85,10 +85,9 @@
+       <recent name="E:\Project\VisDrone_Experiment\utils" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Python.eval_model">
++  <component name="RunManager" selected="Python.train_p2">
+     <configuration name="eval_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="VisDrone_Experiment" />
+-      <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+@@ -108,20 +107,19 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="evaluate_all_models_fixed" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="train_baseline" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="VisDrone_Experiment" />
+-      <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/evaluate_all_models_fixed.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_baseline.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -130,9 +128,8 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="train_baseline" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="train_p2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="VisDrone_Experiment" />
+-      <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+@@ -143,7 +140,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_baseline.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_p2.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -154,7 +151,6 @@
+     </configuration>
+     <configuration name="Python tests in test_inference.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+       <module name="VisDrone_Experiment" />
+-      <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <option name="SDK_HOME" value="" />
+@@ -169,7 +165,6 @@
+     </configuration>
+     <configuration name="Python tests in test_ultralytics.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+       <module name="VisDrone_Experiment" />
+-      <option name="ENV_FILES" value="" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <option name="SDK_HOME" value="" />
+@@ -184,11 +179,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Python.train_p2" />
+         <item itemvalue="Python.eval_model" />
+         <item itemvalue="Python tests.Python tests in test_inference.py" />
+         <item itemvalue="Python.train_baseline" />
+         <item itemvalue="Python tests.Python tests in test_ultralytics.py" />
+-        <item itemvalue="Python.evaluate_all_models_fixed" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -255,7 +250,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1761973813316</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="baseline验证结束">
++      <created>1761974254762</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1761974254762</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
