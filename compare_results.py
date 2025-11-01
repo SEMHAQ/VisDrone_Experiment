@@ -67,6 +67,19 @@ def main():
     else:
         print(f"⚠ 提示: P2+BiFPN+DCN 模型权重不存在（可能还在训练中）")
     
+    # P2 + BiFPN + CARAFE 模型
+    carafe_weights = project_root / "runs" / "visdrone" / "y8s_p2_bifpn_carafe_1024_adamw" / "weights" / "best.pt"
+    if not carafe_weights.exists():
+        # 尝试查找其他可能的路径
+        carafe_dirs = list((project_root / "runs" / "visdrone").glob("*carafe*"))
+        if carafe_dirs:
+            carafe_weights = carafe_dirs[0] / "weights" / "best.pt"
+    
+    if carafe_weights.exists():
+        models_to_eval.append(("P2+BiFPN+CARAFE (YOLOv8s-P2-BiFPN-CARAFE)", carafe_weights))
+    else:
+        print(f"⚠ 提示: P2+BiFPN+CARAFE 模型权重不存在（可能还在训练中）")
+    
     if len(models_to_eval) == 0:
         print("错误: 找不到任何模型权重文件")
         sys.exit(1)
