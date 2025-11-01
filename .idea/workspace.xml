@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="验证代码" />
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="修改P2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -260,7 +260,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761974854979</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761975350952</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761975350952</updated>
+    </task>
+    <task id="LOCAL-00009" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761975929453</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761975929454</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -294,6 +310,7 @@
     <MESSAGE value="推翻重做" />
     <MESSAGE value="baseline验证结束" />
     <MESSAGE value="验证代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="验证代码" />
+    <MESSAGE value="修改P2" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改P2" />
   </component>
 </project>
