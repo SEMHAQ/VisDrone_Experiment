@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="修改P2">
-      <change afterPath="$PROJECT_DIR$/VisDrone2YOLO/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-test-dev/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-train/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisDrone2YOLO/VisDrone2019-DET-val/images/Add_images_here.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cfg/models/yolov8s-p2.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cfg/models/yolov8s-p2.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +294,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761976381366</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761977472528</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1761977472528</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修改P2">
+      <option name="closed" value="true" />
+      <created>1761977552707</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1761977552707</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

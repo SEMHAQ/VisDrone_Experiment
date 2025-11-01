@@ -69,18 +69,29 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-    # 训练参数（与基线保持一致，便于对比）
+    # 训练参数（针对 P2 模型优化显存使用）
     import platform
     is_windows = platform.system() == 'Windows'
     workers = 0 if is_windows else 4
     
+    # P2 模型显存优化配置（12GB RTX 3060）
+    # 选项1：降低 batch size（推荐）
+    batch_size = 4  # 从8降到4，显存占用减半
+    
+    # 选项2：如果还是 OOM，可以降低分辨率
+    # imgsz = 960  # 从1024降到960
+    imgsz = 1024  # 保持1024，配合小batch
+    
+    # 选项3：如果仍然 OOM，可以关闭 Mosaic（会减少内存但可能影响性能）
+    mosaic_enable = 0.8  # 降低到0.8，或设为0.5
+    
     train_args = {
         'data': str(data_yaml),
         'project': 'runs/visdrone',
-        'name': 'y8s_p2_1024_adamw',
-        'imgsz': 1024,
+        'name': 'y8s_p2_1024_adamw_bs4',  # 更新名称以反映配置
+        'imgsz': imgsz,
         'epochs': 300,
-        'batch': 8,
+        'batch': batch_size,
         'workers': workers,
         'device': 0,
         'amp': True,
@@ -101,12 +112,13 @@ def main():
         'translate': 0.1,
         'scale': 0.5,
         'fliplr': 0.5,
-        'mosaic': 1.0,
-        'mixup': 0.1,
+        'mosaic': mosaic_enable,  # 降低 Mosaic 强度
+        'mixup': 0.05,  # 降低 Mixup 以减少显存占用
         'copy_paste': 0.0,
         'box': 7.5,
         'cls': 0.5,
         'dfl': 1.5,
+        'close_mosaic': 15,  # 提前关闭 Mosaic，节省后期显存
     }
 
     print("\n开始训练 YOLOv8s-P2...")
@@ -115,9 +127,15 @@ def main():
     print(f"实验名: {train_args['name']}")
     print(f"改进: +P2 Detection Head (stride=4)")
     print(f"图像尺寸: {train_args['imgsz']}")
-    print(f"批次大小: {train_args['batch']}")
+    print(f"批次大小: {train_args['batch']} (已优化以适配12GB显存)")
+    print(f"Mosaic强度: {train_args['mosaic']} (降低以节省显存)")
     print(f"工作进程数: {train_args['workers']} ({'单进程模式' if is_windows else '多进程模式'})")
     print(f"总轮数: {train_args['epochs']}")
+    print("=" * 60)
+    print("注意: 如果仍出现显存不足，可以:")
+    print("  1. 进一步降低 batch_size 到 2")
+    print("  2. 降低 imgsz 到 960")
+    print("  3. 关闭 Mosaic (mosaic=0.0)")
     print("=" * 60)
 
     try:
