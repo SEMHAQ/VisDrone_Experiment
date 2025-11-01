@@ -85,3 +85,4 @@ head:
   # Detect layers: [P2_td2, P3_final, P4_final, P5_final]
   - [[42, 45, 48, 51], 1, Detect, [nc]]                         # 52 - strides: [4, 8, 16, 32]
 
+
