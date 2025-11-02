@@ -5,14 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="初稿更新">
-      <change afterPath="$PROJECT_DIR$/EXPERIMENT_SCHEDULE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QUICK_REFERENCE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REORGANIZATION_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TRAINING_GUIDE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paper/Word文档使用说明.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paper/generate_word_paper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_p2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" beforeDir="false" afterPath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" afterDir="false" />
     </list>
