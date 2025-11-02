@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="final">
-      <change afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EXPERIMENT_SCHEDULE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QUICK_REFERENCE.md" afterDir="false" />
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="augment项目重组">
+      <change afterPath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_p2.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_p2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +81,11 @@
       <recent name="D:\Project\VisDrone_Experiment\results" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Project\VisDrone_Experiment\results\expected" />
+      <recent name="E:\Project\VisDrone_Experiment\results" />
       <recent name="E:\Project\VisDrone_Experiment\scripts" />
       <recent name="E:\Project\VisDrone_Experiment" />
       <recent name="E:\Project\VisDrone_Experiment\experiments" />
-      <recent name="E:\Project\VisDrone_Experiment\configs\experiments" />
-      <recent name="E:\Project\VisDrone_Experiment\utils" />
     </key>
   </component>
   <component name="RunManager" selected="Python.train_p2_bifpn_dcn">
@@ -347,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762017641222</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="augment项目重组">
+      <option name="closed" value="true" />
+      <created>1762062901505</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1762062901505</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,6 +394,7 @@
     <MESSAGE value="dcn" />
     <MESSAGE value="carafe" />
     <MESSAGE value="final" />
-    <option name="LAST_COMMIT_MESSAGE" value="final" />
+    <MESSAGE value="augment项目重组" />
+    <option name="LAST_COMMIT_MESSAGE" value="augment项目重组" />
   </component>
 </project>
