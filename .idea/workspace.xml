@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="初稿">
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="初稿更新">
+      <change afterPath="$PROJECT_DIR$/EXPERIMENT_SCHEDULE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QUICK_REFERENCE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REORGANIZATION_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TRAINING_GUIDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/paper/Word文档使用说明.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/paper/generate_word_paper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_p2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.md" beforeDir="false" afterPath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" beforeDir="false" afterPath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -361,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762064253280</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="初稿更新">
+      <option name="closed" value="true" />
+      <created>1762065600507</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1762065600507</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -404,6 +419,7 @@
     <MESSAGE value="final" />
     <MESSAGE value="augment项目重组" />
     <MESSAGE value="初稿" />
-    <option name="LAST_COMMIT_MESSAGE" value="初稿" />
+    <MESSAGE value="初稿更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="初稿更新" />
   </component>
 </project>
