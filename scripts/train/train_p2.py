@@ -88,20 +88,20 @@ def main():
     train_args = {
         'data': str(data_yaml),
         'project': 'runs/visdrone',
-        'name': 'y8s_p2_1024_adamw_bs4',  # 更新名称以反映配置
+        'name': 'y8s_p2_1024_adamw_300ep',  # 更新名称以反映配置
         'imgsz': imgsz,
-        'epochs': 30,
+        'epochs': 300,  # 修正：与baseline保持一致
         'batch': batch_size,
         'workers': workers,
         'device': 0,
         'amp': True,
         'seed': 42,
         'optimizer': 'AdamW',
-        'lr0': 0.0025,
+        'lr0': 0.002,  # 略微降低学习率，P2模型更复杂
         'lrf': 0.01,
         'momentum': 0.937,
         'weight_decay': 0.01,
-        'warmup_epochs': 10,
+        'warmup_epochs': 15,  # 增加warmup，帮助P2层稳定
         'warmup_momentum': 0.8,
         'warmup_bias_lr': 0.1,
         'cos_lr': True,
@@ -112,13 +112,13 @@ def main():
         'translate': 0.1,
         'scale': 0.5,
         'fliplr': 0.5,
-        'mosaic': mosaic_enable,  # 降低 Mosaic 强度
-        'mixup': 0.05,  # 降低 Mixup 以减少显存占用
+        'mosaic': 0.9,  # 恢复正常Mosaic强度
+        'mixup': 0.05,
         'copy_paste': 0.0,
         'box': 7.5,
         'cls': 0.5,
         'dfl': 1.5,
-        'close_mosaic': 15,  # 提前关闭 Mosaic，节省后期显存
+        'close_mosaic': 20,  # 后20 epochs关闭Mosaic
     }
 
     print("\n开始训练 YOLOv8s-P2...")

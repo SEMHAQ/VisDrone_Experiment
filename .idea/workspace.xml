@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="carafe">
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="final">
+      <change afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EXPERIMENT_SCHEDULE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QUICK_REFERENCE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compare_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/compare_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_p2.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_p2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +72,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Project/VisDrone_Experiment/results",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -336,7 +339,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762017043219</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="final">
+      <option name="closed" value="true" />
+      <created>1762017641222</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1762017641222</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -376,6 +387,7 @@
     <MESSAGE value="p2+bifpn结果" />
     <MESSAGE value="dcn" />
     <MESSAGE value="carafe" />
-    <option name="LAST_COMMIT_MESSAGE" value="carafe" />
+    <MESSAGE value="final" />
+    <option name="LAST_COMMIT_MESSAGE" value="final" />
   </component>
 </project>
