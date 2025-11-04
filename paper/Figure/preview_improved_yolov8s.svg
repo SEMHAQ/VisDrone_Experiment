@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="980" viewBox="0 0 1800 980">
+  <style>
+    .title { font: 600 18px "Segoe UI", Arial; }
+    .label { font: 500 14px "Segoe UI", Arial; }
+    .small { font: 400 12px "Segoe UI", Arial; }
+    .box { rx: 8; ry: 8; stroke-width: 1.5; }
+    .dashed { stroke-dasharray: 6 6; }
+    .arrow { stroke: #5a5a5a; stroke-width: 1.8; marker-end: url(#arrow); fill: none; }
+    .bb { fill:#fff; stroke:#222; }
+    .mod-blue { fill:#b3cde3; stroke:#6c8ebf; }
+    .mod-yellow { fill:#ffeb84; stroke:#b26b00; }
+    .mod-green { fill:#b6d7a8; stroke:#6aa84f; }
+    .mod-sky { fill:#9fc5e8; stroke:#3d85c6; }
+    .mod-head { fill:#fce5cd; stroke:#e69138; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#5a5a5a" />
+    </marker>
+  </defs>
+
+  <!-- Section frames -->
+  <rect x="30" y="30" width="460" height="820" class="box dashed bb"/>
+  <text x="40" y="55" class="title">Backbone（YOLOv8s）</text>
+  <text x="50" y="80" class="small">输入 1024×1024×3</text>
+
+  <rect x="520" y="30" width="640" height="820" class="box dashed bb"/>
+  <text x="530" y="55" class="title">Neck：BiFPN-Lite（最终，不含 DCN/CARAFE）</text>
+
+  <rect x="1180" y="30" width="580" height="820" class="box dashed bb"/>
+<text x="1190" y="55" class="title">Head：Detect（P2/P3/P4/P5，stride 4/8/16/32）</text>
+
+  <!-- Backbone blocks（与 yolov8s 一致） -->
+  <rect x="70" y="120" width="220" height="44" class="box mod-blue"/>
+  <text x="85" y="147" class="label">Conv P1/2</text>
+
+  <rect x="70" y="190" width="220" height="44" class="box mod-blue"/>
+  <text x="85" y="217" class="label">Conv P2/4</text>
+
+  <text x="70" y="266" class="small">C2f（提取 P2 特征）</text>
+  <rect x="90" y="300" width="190" height="44" class="box mod-yellow"/>
+  <text x="105" y="327" class="label">C2f 128</text>
+
+  <rect x="70" y="380" width="220" height="44" class="box mod-blue"/>
+  <text x="85" y="407" class="label">Conv P4/16</text>
+
+  <rect x="90" y="450" width="190" height="44" class="box mod-yellow"/>
+  <text x="105" y="477" class="label">C2f 512</text>
+
+  <rect x="70" y="520" width="220" height="44" class="box mod-blue"/>
+  <text x="85" y="547" class="label">Conv P5/32</text>
+
+  <text x="70" y="606" class="small">SPPF</text>
+  <rect x="90" y="630" width="190" height="44" class="box mod-sky"/>
+  <text x="110" y="657" class="label">SPPF 1024</text>
+
+  <!-- Neck：四条主通道与四个阶段（A:Top-down, B:Bottom-up, C:Top-down2, D:Final BU） -->
+  <!-- 分辨率（基于输入1024）：P5=32×32×1024，P4=64×64×512，P3=128×128×256，P2=256×256×128 -->
+  <text x="530" y="110" class="small">P5 32×32×1024</text>
+  <text x="530" y="210" class="small">P4 64×64×512</text>
+  <text x="530" y="320" class="small">P3 128×128×256</text>
+  <text x="530" y="430" class="small">P2 256×256×128</text>
+
+  <!-- Stage A: Top-down (P5→P4→P3→P2) -->
+  <rect x="560" y="140" width="140" height="40" class="box mod-green"/>
+<text x="570" y="165" class="label">Upsample ×2（from P5）</text>
+  <rect x="560" y="240" width="140" height="40" class="box mod-yellow"/>
+<text x="570" y="260" class="label">C2f 512</text>
+<text x="570" y="278" class="small">after concat with P4</text>
+  <rect x="560" y="350" width="140" height="40" class="box mod-yellow"/>
+<text x="570" y="370" class="label">C2f 256</text>
+<text x="570" y="388" class="small">after concat with P3</text>
+  <rect x="560" y="460" width="140" height="40" class="box mod-yellow"/>
+<text x="570" y="480" class="label">C2f 128</text>
+<text x="570" y="498" class="small">after concat with P2</text>
+
+  <!-- Stage B: Bottom-up (P2→P3→P4→P5) -->
+  <rect x="740" y="350" width="140" height="40" class="box mod-yellow"/>
+<text x="750" y="370" class="label">C2f 256</text>
+<text x="750" y="388" class="small">after conv3×3 s2 + concat(P3)</text>
+
+  <rect x="740" y="240" width="140" height="40" class="box mod-yellow"/>
+<text x="750" y="260" class="label">C2f 512</text>
+<text x="750" y="278" class="small">after conv3×3 s2 + concat(P4)</text>
+
+  <rect x="740" y="140" width="140" height="40" class="box mod-yellow"/>
+<text x="750" y="160" class="label">C2f 1024</text>
+<text x="750" y="178" class="small">after conv3×3 s2 + concat(P5)</text>
+
+  <!-- Stage C: Second top-down (P5_bu→P4_bu→P3_bu→P2_td) -->
+  <rect x="920" y="240" width="140" height="40" class="box mod-yellow"/>
+<text x="930" y="260" class="label">C2f 512</text>
+<text x="930" y="278" class="small">after upsample ×2 + concat(Stage B P4)</text>
+
+  <rect x="920" y="350" width="140" height="40" class="box mod-yellow"/>
+<text x="930" y="370" class="label">C2f 256</text>
+<text x="930" y="388" class="small">after upsample ×2 + concat(Stage B P3)</text>
+
+  <rect x="920" y="460" width="140" height="40" class="box mod-yellow"/>
+<text x="930" y="480" class="label">C2f 128</text>
+<text x="930" y="498" class="small">after upsample ×2 + concat(P2 branch)</text>
+
+  <!-- Stage D: Final bottom-up（得到 P3_final/P4_final/P5_final） -->
+  <rect x="1100" y="350" width="140" height="40" class="box mod-yellow"/>
+<text x="1110" y="370" class="label">C2f 256</text>
+<text x="1110" y="388" class="small">after conv3×3 s2 + concat(Stage C P3)</text>
+
+  <rect x="1100" y="240" width="140" height="40" class="box mod-yellow"/>
+<text x="1110" y="260" class="label">C2f 512</text>
+<text x="1110" y="278" class="small">after conv3×3 s2 + concat(Stage C P4)</text>
+
+  <rect x="1100" y="140" width="140" height="40" class="box mod-yellow"/>
+<text x="1110" y="160" class="label">C2f 1024</text>
+<text x="1110" y="178" class="small">after conv3×3 s2 + concat(Stage B P5)</text>
+
+  <!-- Head：四分支 Detect（保持水平箭头，无交叉） -->
+  <rect x="1400" y="460" width="190" height="44" class="box mod-head"/>
+  <text x="1410" y="482" class="label">Detect (P2, stride 4)</text>
+
+  <rect x="1400" y="350" width="190" height="44" class="box mod-head"/>
+  <text x="1410" y="372" class="label">Detect (P3, stride 8)</text>
+
+  <rect x="1400" y="240" width="190" height="44" class="box mod-head"/>
+  <text x="1410" y="262" class="label">Detect (P4, stride 16)</text>
+
+  <rect x="1400" y="140" width="190" height="44" class="box mod-head"/>
+  <text x="1410" y="162" class="label">Detect (P5, stride 32)</text>
+
+  <!-- Flow arrows：Backbone → Stage A（L形，避免交叉） -->
+  <path class="arrow" d="M300 212 L520 212 L520 480 L560 480" />
+  <path class="arrow" d="M300 322 L520 322 L520 370 L560 370" />
+  <path class="arrow" d="M300 402 L520 402 L520 260 L560 260" />
+  <path class="arrow" d="M300 652 L520 652 L520 160 L560 160" />
+
+  <!-- Flow arrows：Stage D finals → Head（左到右，水平进入） -->
+  <path class="arrow" d="M1240 160 L1400 160" />
+  <path class="arrow" d="M1240 260 L1400 260" />
+  <path class="arrow" d="M1240 370 L1400 370" />
+  <path class="arrow" d="M1240 480 L1400 480" />
+
+  <!-- Bottom legend -->
+  <rect x="30" y="870" width="1730" height="80" class="box dashed" fill="#fff7f7" stroke="#cc0000"/>
+<text x="40" y="895" class="small">图例：蓝=Conv（主干），黄=C2f（融合输出）；绿色/天蓝仅标注操作：Upsample×2、Conv3×3 s2、Concat。未包含 DCNv2/CARAFE。</text>
+<text x="40" y="915" class="small">严格依据 cfg/models/yolov8s-p2-bifpn-final.yaml；每个黄色框给出“具体操作+通道数”，无需内部缩写，Detect 源自 P2/P3/P4/P5（stride 4/8/16/32）。</text>
+<text x="40" y="935" class="small">版式说明：四行=P2/P3/P4/P5，四列=四次融合（自顶向下/自底向上/再次自顶向下/最终自底向上）；箭头均水平或折线且无交叉。</text>
+</svg>
