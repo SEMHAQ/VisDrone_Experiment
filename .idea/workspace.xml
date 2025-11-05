@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="挑出三张可视化对比图">
+    <list default="true" id="ff4f5221-f6a2-4741-b819-4e91e54a00b0" name="Changes" comment="周三软件工程Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/Figure/a_train_batch0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper/Figure/b_train_batch0.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/Figure/figure1.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/paper/Figure/figure1.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper/Figure/figure1.png" beforeDir="false" afterPath="$PROJECT_DIR$/paper/Figure/figure1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" beforeDir="false" afterPath="$PROJECT_DIR$/paper/论文初稿_VisDrone小目标检测.doc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,25 +31,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;SEMHAQ&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/SEMHAQ/VisDrone_Experiment.git&quot;,
-    &quot;accountId&quot;: &quot;62f440a9-81e0-4c4e-8575-94edf90f1b0e&quot;
-  }
-}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
-}</component>
   <component name="ProjectId" id="34WVfzWB4RKnK6S4wfS9qXwOrb6" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,32 +42,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.evaluate_all_models.executor&quot;: &quot;Run&quot;,
-    &quot;Python.evaluate_all_models_fixed.executor&quot;: &quot;Run&quot;,
-    &quot;Python.run_inference_on_test_pic.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_inference.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_bifpn_only.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_ema_bifpn.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_ema_only.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_full_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_p2_bifpn_dcn.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Project/VisDrone_Experiment/models/test_pic&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Project\VisDrone_Experiment\models\test_pic" />
-      <recent name="E:\Project\VisDrone_Experiment\models\pred_best_baseline" />
-      <recent name="E:\Project\VisDrone_Experiment\models\pred_best_final" />
       <recent name="D:\Project\VisDrone_Experiment\results" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -95,7 +59,7 @@
       <recent name="E:\Project\VisDrone_Experiment\experiments" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_inference_on_test_pic">
+  <component name="RunManager" selected="Python.train_p2_bifpn_dcn">
     <configuration name="compare_results" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
       <option name="ENV_FILES" value="" />
@@ -118,7 +82,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_inference_on_test_pic" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="eval_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="VisDrone_Experiment" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,33 +91,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/run_inference_on_test_pic.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test_inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="VisDrone_Experiment" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/inference" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/inference/test_inference.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eval_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,13 +148,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests in test_inference.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="VisDrone_Experiment" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_inference.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_inference_on_test_pic" />
-        <item itemvalue="Python.test_inference" />
         <item itemvalue="Python.train_p2_bifpn_dcn" />
         <item itemvalue="Python.compare_results" />
         <item itemvalue="Python.train_p2" />
+        <item itemvalue="Python.eval_model" />
       </list>
     </recent_temporary>
   </component>
@@ -383,23 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1762065600507</updated>
     </task>
-    <task id="LOCAL-00020" summary="初稿大更新大整合 写了个推理脚本 找到张精品好图">
-      <option name="closed" value="true" />
-      <created>1762193013625</created>
+    <task id="LOCAL-00020" summary="初稿更新">
+      <created>1762141113781</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1762193013625</updated>
+      <updated>1762141113781</updated>
     </task>
-    <task id="LOCAL-00021" summary="挑出三张可视化对比图">
-      <option name="closed" value="true" />
-      <created>1762243624640</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1762243624640</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -443,8 +390,7 @@
     <MESSAGE value="augment项目重组" />
     <MESSAGE value="初稿" />
     <MESSAGE value="初稿更新" />
-    <MESSAGE value="初稿大更新大整合 写了个推理脚本 找到张精品好图" />
-    <MESSAGE value="挑出三张可视化对比图" />
-    <option name="LAST_COMMIT_MESSAGE" value="挑出三张可视化对比图" />
+    <MESSAGE value="周三软件工程Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="周三软件工程Update" />
   </component>
 </project>
